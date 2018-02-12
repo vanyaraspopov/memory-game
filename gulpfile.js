@@ -4,7 +4,8 @@
 var gulp = require('gulp'),
     browserSync = require("browser-sync"),
     reload = browserSync.reload,
-    rigger = require('gulp-rigger'), rimraf = require('rimraf'),
+    rigger = require('gulp-rigger'),
+    rimraf = require('rimraf'),
     sourcemaps = require('gulp-sourcemaps'),
     watch = require('gulp-watch');
 
@@ -40,8 +41,8 @@ var paths = {
         //  sources
         base: 'app/',
         html: 'app/*.html',
-        //js: 'app/js/index.js',
-        js: 'app/js/**/*.js',
+        js: 'app/js/index.js',
+        //js: 'app/js/**/*.js',
         style: 'app/sass/style.scss',
         img: 'app/img/**/*.*',
         fonts: 'app/fonts/**/*.*',
@@ -95,7 +96,7 @@ gulp.task('html:build', function () {
 
 gulp.task('js:build', function () {
     return gulp.src(paths.src.js)
-    // .pipe(rigger())
+        .pipe(rigger())
     // .pipe(sourcemaps.init())
     // .pipe(uglify())
     // .pipe(sourcemaps.write())

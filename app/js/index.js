@@ -6,7 +6,6 @@
  */
 
 //  Custom scripts
-//= style.js
+//= app.js
 
 // Modules
-//= modules/app.js
