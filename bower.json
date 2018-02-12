@@ -1,0 +1,39 @@
+{
+  "name": "memory-game",
+  "description": "Test assignment for getting an internship in SKB Kontur",
+  "main": "",
+  "authors": [
+    "RV"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "normalize-css": "normalize.css#^7.0.0",
+    "components-font-awesome": "^4.7.0",
+    "bourbon": "^5.0.0"
+  },
+  "overrides": {
+    "jquery": {
+      "main": "dist/jquery.min.js"
+    },
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.min.css",
+        "dist/js/bootstrap.min.js"
+      ]
+    },
+    "components-font-awesome": {
+      "main": [
+        "css/font-awesome.min.css",
+        "fonts/**/*.*"
+      ]
+    }
+  }
+}
