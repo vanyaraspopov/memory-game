@@ -1,5 +1,5 @@
 // Site settings
-@import "site-settings";
+@import "settings";
 
 // Vendor
 @import "../bower_components/bourbon/core/bourbon";
@@ -10,6 +10,6 @@
 //@import "vendor-override/foundation";
 
 // Stylesheets
+@import "base";
+@import "layout/index";
 @import "modules/index";
-@import "state/index";
-@import "theme/index";
