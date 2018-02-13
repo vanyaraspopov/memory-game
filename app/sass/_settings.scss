@@ -37,3 +37,20 @@ $header-padding-sm: 30px 0;
 $section-padding-lg: 115px 0;
 $section-padding-md: 75px 0;
 $section-padding-sm: 50px 0;
+
+// Cards
+$card-margin: 5px;
+$card-width: 226px;
+$card-height: 314px;
+$card-aspect-ratio: $card-width / $card-height;
+$cards-per-row: 6;
+$cards-container-width: ($card-width + $card-margin) * ($cards-per-row - 1) + $card-width;
+$cards-container-height: ($card-height + $card-margin) * (2) + $card-height;
+$cards-container-max-width: 760px;
+
+$cards-per-row-port: 4;
+$cards-container-width-port: ($card-width + $card-margin) * ($cards-per-row-port - 1) + $card-width;
+$cards-container-height-port: ($card-height + $card-margin) * (4) + $card-height;
+
+//  Game page
+$game-page-max-width: $cards-container-max-width;

@@ -1,10 +1,2 @@
-.main-container {
-  background: $green;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex: auto;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+@import "game-page";
+@import "main";

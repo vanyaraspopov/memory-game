@@ -8,7 +8,7 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            state: STATE_START
+            state: STATE_PLAY
         },
         methods: {
             play: function () {

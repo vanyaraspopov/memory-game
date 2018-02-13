@@ -1,0 +1,30 @@
+.game {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 95vw;
+  width: $cards-container-width;
+}
+
+.game__cards {
+  display: flex;
+  flex: 1 1 100%;
+}
+
+.game__play-again {
+  background: #f00;
+  display: flex;
+  flex: 1 1 50%;
+}
+
+.game__score {
+  background: #00f;
+  display: flex;
+  flex: 1 1 50%;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  .game {
+    max-width: $game-page-max-width;
+  }
+}
