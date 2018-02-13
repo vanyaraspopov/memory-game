@@ -8,7 +8,8 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            state: STATE_PLAY
+            state: STATE_END,
+            score: 777
         },
         methods: {
             play: function () {

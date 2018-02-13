@@ -1,0 +1,13 @@
+<div id="finalPage" v-if="state == 'end'">
+  <div class="text-center">
+    <div class="hero">
+      <img class="hero__image" src="img/Group 2.png" alt="Game completed" width="508" height="266">
+      <h1 class="hero__title--no-caps">
+        Поздравляем!
+        <br>
+        Ваш итоговый счет: {{ score }}
+      </h1>
+      <button class="hero__btn" @click="replay">Ещё раз</button>
+    </div>
+  </div>
+</div>
