@@ -1,13 +1,9 @@
 .game {
   display: flex;
   flex-flow: row wrap;
+  margin-bottom: 20px;
   max-width: 95vw;
   width: $cards-container-width;
-}
-
-.game__cards {
-  display: block;
-  margin: 20px 0 0 0;
 }
 
 .game__play-again {

@@ -1,0 +1,40 @@
+.grid {
+  --pad: 5px;
+  box-sizing: border-box;
+  margin-right: calc(-1 * var(--pad));
+
+  &::after {
+    /* Or @extend clearfix */
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+[class*='col-'] {
+  box-sizing: border-box;
+  float: left;
+  padding-right: var(--pad);
+}
+
+.col-1-4 {
+  width: 25%;
+}
+
+.col-1-6 {
+  width: 16.66%;
+}
+
+/* Landscape */
+@media all and (orientation: landscape) {
+  .col-lnd-1-6 {
+    width: 16.66%;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  .grid {
+    --pad: 15px;
+  }
+}

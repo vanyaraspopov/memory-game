@@ -1,24 +1,20 @@
-.cards {
-  background: #000;
-  position: relative;
-  margin: -$card-margin 0 0 -$card-margin;
-  width: $cards-container-width;
-  max-height: 90vh;
-  max-width: 95vw;
-  padding-top: $cards-container-height / $cards-container-width * 100%;
+.card {
+  width: 100%;
+  background: url("../img/cards/back.png") no-repeat center center;
+  background-size: cover;
+  margin: auto;
+  margin-bottom: 5px;
+  overflow: hidden;
+  &::before {
+    content: "";
+    padding-top: 1 / $card-aspect-ratio * 100%;
+    float: left;
+  }
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
-  .cards {
-    max-width: $cards-container-max-width;
-  }
-}
-
-/* Portrait orientation */
-@media all and (orientation: portrait) {
-  .cards {
-    width: $cards-container-width-port;
-    padding-top: $cards-container-height-port / $cards-container-width-port * 100%;
+  .card {
+    margin-bottom: 15px;
   }
 }

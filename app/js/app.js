@@ -13,6 +13,9 @@
         methods: {
             play: function () {
                 this.state = STATE_PLAY;
+            },
+            replay: function() {
+                this.state = STATE_START;
             }
         }
     });
