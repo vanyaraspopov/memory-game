@@ -16,7 +16,9 @@
 }
 
 .hero__image {
-  width: 80vw;
+  max-width: 95vw;
+  max-height: 50vh;
+  width: auto;
   height: auto;
 }
 
