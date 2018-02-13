@@ -1,1 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic');
+
+@font-face {
+  font-family: 'Krungthep';
+  src: url('../fonts/Krungthep.eot');
+  src: url('../fonts/Krungthep.woff2') format('woff2'),
+  url('../fonts/Krungthep.woff') format('woff'),
+  url('../fonts/Krungthep.ttf') format('truetype'),
+  url('../fonts/Krungthep.svg#Krungthep') format('svg'),
+  url('../fonts/Krungthep.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}

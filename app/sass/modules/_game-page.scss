@@ -1,0 +1,41 @@
+.game {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 95vw;
+  width: $cards-container-width;
+}
+
+.game__cards {
+  display: block;
+  margin: 20px 0 0 0;
+}
+
+.game__play-again {
+  display: inline-block;
+  width: 50%;
+}
+
+.game__score {
+  @extend .game__play-again;
+  text-align: right;
+}
+
+.play-again {
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.score__value {
+  font-family: 'Krungthep', sans-serif;
+  margin-left:  15px;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 768px) {
+  .game {
+    max-width: $game-page-max-width;
+  }
+}
