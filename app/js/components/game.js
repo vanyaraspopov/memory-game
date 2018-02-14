@@ -49,6 +49,9 @@ var Game = (function () {
     Card.prototype.turn = function () {
         this.opened ^= true;
     };
+    Card.prototype.toString = function () {
+        return this.rank + this.suit + ' ' + (this.opened ? 'opened' : 'closed');
+    };
 
 
     //  Component API
@@ -61,6 +64,8 @@ var Game = (function () {
         //,shuffle: _shuffle
 
         ,init: init
+        ,reset: reset
+
         ,closeCard: closeCard
         ,openCard: openCard
         ,turnCard: turnCard
@@ -151,6 +156,7 @@ var Game = (function () {
         var deck = _createDeck();
         game.cards = _getRandomPairs(pairsCount, deck);
         game.cards = _shuffle(game.cards, 5);
+        game.score = 0;
     }
 
     function closeCard(index) {
@@ -172,6 +178,10 @@ var Game = (function () {
             return;
         }
         game.cards[index].turn();
+    }
+
+    function reset() {
+        game.init();
     }
 
 })();
