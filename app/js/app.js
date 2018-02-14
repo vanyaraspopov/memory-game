@@ -5,6 +5,8 @@
     const STATE_PLAY = 'play';
     const STATE_END = 'end';
 
+    Game.init();
+
     var vm = new Vue({
         el: '#app',
         data: {

@@ -51,9 +51,20 @@ var Game = (function () {
     };
 
 
-    //  Properties
-    var score = 0;
-    var cards = [];
+    //  Component API
+    var game = {
+        score: 0,
+        cards: []
+
+        //,createDeck: _createDeck
+        //,getRandomPairs: _getRandomPairs
+        //,shuffle: _shuffle
+
+        ,init: init
+        ,closeCard: closeCard
+        ,openCard: openCard
+        ,turnCard: turnCard
+    };
 
 
     //  Private methods
@@ -75,6 +86,20 @@ var Game = (function () {
     }
 
     /**
+     * Checks if index in array range.
+     * @param index
+     * @param array
+     * @return {boolean}
+     */
+    function _checkIndexInRange(index, array){
+        if (index < 0 || index > array.length - 1) {
+            console.log('Index out of range');
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Selects cards from deck randomly and duplicates them to get pairs.
      * @param {Number} pairsCount
      * @param {Array} deck Array of cards (deck) to select from
@@ -93,16 +118,6 @@ var Game = (function () {
     }
 
     /**
-     * Initializes game
-     */
-    (function _init() {
-        var pairsCount = 9;
-        var deck = _createDeck();
-        cards = _getRandomPairs(pairsCount, deck);
-        cards = _shuffle(cards);
-    })();
-
-    /**
      * Just shuffles cards in array of cards.
      * @param cards
      */
@@ -119,39 +134,36 @@ var Game = (function () {
 
     //  Public methods
 
+    /**
+     * Initializes game
+     */
+    function init() {
+        var pairsCount = 9;
+        var deck = _createDeck();
+        game.cards = _getRandomPairs(pairsCount, deck);
+        game.cards = _shuffle(game.cards);
+    }
+
     function closeCard(index) {
-        if (index < 0 || index > cards.length - 1) {
-            console.log('Index out of range');
+        if (!_checkIndexInRange(index, game.cards)) {
+            return;
         }
-        cards[index].hide();
+        game.cards[index].hide();
     }
 
     function openCard(index) {
-        if (index < 0 || index > cards.length - 1) {
-            console.log('Index out of range');
+        if (!_checkIndexInRange(index, game.cards)) {
+            return;
         }
-        cards[index].show();
+        game.cards[index].show();
     }
 
     function turnCard(index) {
-        if (index < 0 || index > cards.length - 1) {
-            console.log('Index out of range');
+        if (!_checkIndexInRange(index, game.cards)) {
+            return;
         }
-        cards[index].turn();
+        game.cards[index].turn();
     }
 
-
-
-    return {
-        cards: cards
-        ,score: score
-
-        //,createDeck: _createDeck
-        //,getRandomPairs: _getRandomPairs
-        //,shuffle: _shuffle
-
-        ,closeCard: closeCard
-        ,openCard: openCard
-        ,turnCard: turnCard
-    };
+    return game;
 })();
