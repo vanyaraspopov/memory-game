@@ -99,7 +99,7 @@ var Game = (function () {
         var pairsCount = 9;
         var deck = _createDeck();
         cards = _getRandomPairs(pairsCount, deck);
-        _shuffle(cards);
+        cards = _shuffle(cards);
     })();
 
     /**
@@ -107,11 +107,13 @@ var Game = (function () {
      * @param cards
      */
     function _shuffle(cards) {
-        function compareRandom(a, b) {
-            return Math.random() - 0.5;
+        var _shuffled = [];
+        while (cards.length > 0) {
+            var i = Math.floor(Math.random() * cards.length);
+            var k = Math.floor(Math.random() * _shuffled.length);
+            _shuffled.splice(k, 0, cards.splice(i, 1)[0]);
         }
-
-        cards.sort(compareRandom);
+        return _shuffled;
     }
 
 
