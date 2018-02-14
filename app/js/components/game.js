@@ -37,8 +37,17 @@ var Game = (function () {
         var skinExt = '.png';
         return skinDir + this.rank + this.suit + skinExt;
     };
-    Card.prototype.isSameWith - function (card) {
+    Card.prototype.isSameWith = function (card) {
         return this.suit === card.suit && this.rank === card.rank;
+    };
+    Card.prototype.hide = function () {
+        this.opened = false;
+    };
+    Card.prototype.show = function () {
+        this.opened = true;
+    };
+    Card.prototype.turn = function () {
+        this.opened ^= true;
     };
 
 
@@ -76,9 +85,9 @@ var Game = (function () {
         var pairs = [];
         for (var i = 0; i < pairsCount; i++) {
             var rand = Math.floor(Math.random() * _deck.length);
-            var card = _deck.splice(rand, 1);
+            var card = _deck.splice(rand, 1)[0];
             pairs.push(card);
-            pairs.push(card);
+            pairs.push(new Card(card.rank, card.suit));
         }
         return pairs;
     }
@@ -105,8 +114,42 @@ var Game = (function () {
         cards.sort(compareRandom);
     }
 
+
+    //  Public methods
+
+    function closeCard(index) {
+        if (index < 0 || index > cards.length - 1) {
+            console.log('Index out of range');
+        }
+        cards[index].hide();
+    }
+
+    function openCard(index) {
+        if (index < 0 || index > cards.length - 1) {
+            console.log('Index out of range');
+        }
+        cards[index].show();
+    }
+
+    function turnCard(index) {
+        if (index < 0 || index > cards.length - 1) {
+            console.log('Index out of range');
+        }
+        cards[index].turn();
+    }
+
+
+
     return {
-        cards: cards,
-        score: score
+        cards: cards
+        ,score: score
+
+        //,createDeck: _createDeck
+        //,getRandomPairs: _getRandomPairs
+        //,shuffle: _shuffle
+
+        ,closeCard: closeCard
+        ,openCard: openCard
+        ,turnCard: turnCard
     };
 })();
