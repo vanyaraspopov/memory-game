@@ -10,24 +10,24 @@
     var vm = new Vue({
         el: '#app',
         data: {
-            cards: Game.cards,
-            state: STATE_START,
-            score: Game.score
+            cards: Game.cards
+            ,score: Game.score
+            ,state: STATE_START
         },
         methods: {
             closeCard: function (index) {
                 Game.closeCard(index);
-            },
-            openCard: function (index) {
+            }
+            ,openCard: function (index) {
                 Game.openCard(index);
-            },
-            turnCard: function (index) {
+            }
+            ,turnCard: function (index) {
                 Game.turnCard(index);
-            },
-            play: function () {
+            }
+            ,play: function () {
                 this.state = STATE_PLAY;
-            },
-            replay: function () {
+            }
+            ,replay: function () {
                 this.state = STATE_START;
                 this.score = 0;
             }

@@ -2,8 +2,6 @@
   cursor: pointer;
   position: relative;
   width: 100%;
-  background: url("../img/cards/back.png") no-repeat center center;
-  background-size: cover;
   margin: auto;
   margin-bottom: 5px;
   overflow: hidden;
@@ -14,11 +12,7 @@
   }
 }
 
-.card--back {
-  @extend .card;
-}
-
-.card__face {
+%card__inner {
   background: transparent no-repeat center center;
   background-size: cover;
   position: absolute;
@@ -26,6 +20,16 @@
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.card__back {
+  @extend %card__inner;
+  background-image: url("../img/cards/back.png");
+}
+
+.card__face {
+  @extend %card__inner;
+  background-image: transparent no-repeat center center;
 }
 
 /* Small Devices, Tablets */
