@@ -5,7 +5,5 @@
  * to include js files
  */
 
-//  Custom scripts
+//= components/game.js
 //= app.js
-
-// Modules
