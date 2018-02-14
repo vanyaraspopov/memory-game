@@ -29,7 +29,10 @@
 
 .card__face {
   @extend %card__inner;
-  background-image: transparent no-repeat center center;
+}
+
+.card__placeholder {
+  @extend %card__inner;
 }
 
 /* Small Devices, Tablets */

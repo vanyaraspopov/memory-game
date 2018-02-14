@@ -20,6 +20,10 @@ var Game = (function () {
     const RANK_KING = 'K';
     const RANK_ACE = 'A';
 
+    const SCORE_ADD = 'add';
+    const SCORE_SUBTRACT = 'sub';
+
+
     /**
      * Card model
      * @param rank RANK_ONE | RANK_TWO ...
@@ -30,6 +34,7 @@ var Game = (function () {
         this.rank = rank;
         this.suit = suit;
         this.opened = false;
+        this.hidden = false;
         this.skin = this.getSkin();
     };
     Card.prototype.getSkin = function () {
@@ -41,7 +46,7 @@ var Game = (function () {
         return this.suit === card.suit && this.rank === card.rank;
     };
     Card.prototype.hide = function () {
-        this.opened = false;
+        this.hidden = true;
     };
     Card.prototype.show = function () {
         this.opened = true;
@@ -49,13 +54,21 @@ var Game = (function () {
     Card.prototype.turn = function () {
         this.opened ^= true;
     };
+    Card.prototype.turnDown = function () {
+        this.opened = false;
+    };
     Card.prototype.toString = function () {
         return this.rank + this.suit + ' ' + (this.opened ? 'opened' : 'closed');
     };
 
 
+    var cardOpened = null;
+    var pairsCount = 9;
+    var pairsFound = 0;
+
     //  Component API
     var game = {
+        completed: false,
         score: 0,
         cards: []
 
@@ -63,12 +76,12 @@ var Game = (function () {
         //,getRandomPairs: _getRandomPairs
         //,shuffle: _shuffle
 
-        ,init: init
-        ,reset: reset
+        , init: init
+        , reset: reset
 
-        ,closeCard: closeCard
-        ,openCard: openCard
-        ,turnCard: turnCard
+        , closeCard: closeCard
+        , openCard: openCard
+        , turnCard: turnCard
     };
     return game;
 
@@ -97,12 +110,20 @@ var Game = (function () {
      * @param array
      * @return {boolean}
      */
-    function _checkIndexInRange(index, array){
+    function _checkIndexInRange(index, array) {
         if (index < 0 || index > array.length - 1) {
             console.log('Index out of range');
             return false;
         }
         return true;
+    }
+
+    /**
+     * Checks if game completed
+     * @return {boolean}
+     */
+    function _checkCompleted(){
+        game.completed = pairsCount === pairsFound;
     }
 
     /**
@@ -121,6 +142,25 @@ var Game = (function () {
             pairs.push(new Card(card.rank, card.suit));
         }
         return pairs;
+    }
+
+    /**
+     * Changes score
+     * @param action SCORE_ADD | SCORE_SUBTRACT
+     * @private
+     */
+    function _score(action) {
+        var coef = 42;
+        var pairsNotFound = pairsCount - pairsFound;
+        switch (action) {
+            case SCORE_ADD:
+                game.score += pairsNotFound * coef;
+                break;
+            case SCORE_SUBTRACT:
+                game.score -= pairsFound * coef;
+                break;
+            default: break;
+        }
     }
 
     /**
@@ -152,10 +192,10 @@ var Game = (function () {
      * Initializes game
      */
     function init() {
-        var pairsCount = 9;
         var deck = _createDeck();
         game.cards = _getRandomPairs(pairsCount, deck);
         game.cards = _shuffle(game.cards, 5);
+        game.completed = false;
         game.score = 0;
     }
 
@@ -163,14 +203,37 @@ var Game = (function () {
         if (!_checkIndexInRange(index, game.cards)) {
             return;
         }
-        game.cards[index].hide();
+        game.cards[index].turnDown();
     }
 
     function openCard(index) {
         if (!_checkIndexInRange(index, game.cards)) {
             return;
         }
-        game.cards[index].show();
+        var timeout = 1000;
+        var card = game.cards[index];
+        card.show();
+        if (cardOpened === null) {
+            cardOpened = game.cards[index];
+        } else {
+            if (card.isSameWith(cardOpened)) {
+                setTimeout(function () {
+                    card.hide();
+                    cardOpened.hide();
+                    cardOpened = null;
+                    _score(SCORE_ADD);
+                    pairsFound++;
+                    _checkCompleted();
+                }, timeout);
+            } else {
+                setTimeout(function () {
+                    card.turnDown();
+                    cardOpened.turnDown();
+                    cardOpened = null;
+                    _score(SCORE_SUBTRACT);
+                }, timeout);
+            }
+        }
     }
 
     function turnCard(index) {

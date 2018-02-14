@@ -7,7 +7,7 @@ var vm = (function (Game) {
 
     Game.init();
 
-    return new Vue({
+    var vm = new Vue({
         el: '#app',
         data: function () {
             return {
@@ -17,7 +17,7 @@ var vm = (function (Game) {
             }
         },
         methods: {
-            changeState: function(state){
+            changeState: function (state) {
                 this.state = state;
             }
             , closeCard: function (index) {
@@ -35,9 +35,18 @@ var vm = (function (Game) {
             , replay: function () {
                 this.changeState(STATE_START);
                 Game.reset();
+            }
+            , updateViewModel: function () {
                 Vue.set(this, 'cards', Game.cards);
                 Vue.set(this, 'score', Game.score);
+                if (Game.completed) {
+                    this.changeState(STATE_END);
+                }
             }
         }
     });
+    setInterval(function () {
+        vm.updateViewModel();
+    }, 100);
+    return vm;
 })(Game);
