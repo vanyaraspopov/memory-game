@@ -65,6 +65,7 @@ var Game = (function () {
         ,openCard: openCard
         ,turnCard: turnCard
     };
+    return game;
 
 
     //  Private methods
@@ -119,16 +120,24 @@ var Game = (function () {
 
     /**
      * Just shuffles cards in array of cards.
-     * @param cards
+     * @param {Array} cards
+     * @param {Number} count of shuffle
+     * @return {Array} cards shuffled
      */
-    function _shuffle(cards) {
+    function _shuffle(cards, count) {
+        if (count === undefined) {
+            count = 1;
+        }
+        if (count <= 0) {
+            return cards;
+        }
         var _shuffled = [];
         while (cards.length > 0) {
             var i = Math.floor(Math.random() * cards.length);
             var k = Math.floor(Math.random() * _shuffled.length);
             _shuffled.splice(k, 0, cards.splice(i, 1)[0]);
         }
-        return _shuffled;
+        return _shuffle(_shuffled, count - 1);
     }
 
 
@@ -141,7 +150,7 @@ var Game = (function () {
         var pairsCount = 9;
         var deck = _createDeck();
         game.cards = _getRandomPairs(pairsCount, deck);
-        game.cards = _shuffle(game.cards);
+        game.cards = _shuffle(game.cards, 5);
     }
 
     function closeCard(index) {
@@ -165,5 +174,4 @@ var Game = (function () {
         game.cards[index].turn();
     }
 
-    return game;
 })();
