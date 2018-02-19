@@ -32,9 +32,9 @@ var vm = (function (Game) {
                 timeouts = [];
             }
             , closeCard: function (index) {
-                if (this.locked) return;
+                /*if (this.locked) return;
                 this.cardOpened = false;
-                Game.closeCard(index);
+                Game.closeCard(index);*/
             }
             , openCard: function (index) {
                 if (this.locked) return;
