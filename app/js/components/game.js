@@ -209,6 +209,9 @@ var Game = (function () {
         if (!_checkIndexInRange(index, game.cards)) {
             return;
         }
+        if (cardOpened !== null && cardOpened.isSameWith(game.cards[index])) {
+            cardOpened = null;
+        }
         game.cards[index].turnDown();
     }
 

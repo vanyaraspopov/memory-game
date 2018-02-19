@@ -33,6 +33,7 @@ var vm = (function (Game) {
             }
             , closeCard: function (index) {
                 if (this.locked) return;
+                this.cardOpened = false;
                 Game.closeCard(index);
             }
             , openCard: function (index) {
