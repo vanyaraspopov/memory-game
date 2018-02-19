@@ -1,7 +1,9 @@
 <div id="startScreen" v-if="state == 'start'">
   <div class="text-center">
     <div class="hero">
-      <img class="hero__image" src="img/StartGame.png" alt="Start Game" width="501" height="257">
+      <picture>
+        <img class="hero__image" src="img/StartGame.png" srcset="img/StartGame@2x.png 2x" alt="Start Game">
+      </picture>
       <h1 class="hero__title">Memory Game</h1>
       <button class="hero__btn" @click="play" data-tid="NewGame-startGame">Начать игру</button>
     </div>
