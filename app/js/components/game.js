@@ -122,7 +122,7 @@ var Game = (function () {
      * Checks if game completed
      * @return {boolean}
      */
-    function _checkCompleted(){
+    function _checkCompleted() {
         game.completed = pairsCount === pairsFound;
     }
 
@@ -159,7 +159,8 @@ var Game = (function () {
             case SCORE_SUBTRACT:
                 game.score -= pairsFound * coef;
                 break;
-            default: break;
+            default:
+                break;
         }
     }
 
@@ -197,6 +198,9 @@ var Game = (function () {
         game.cards = _shuffle(game.cards, 5);
         game.completed = false;
         game.score = 0;
+
+        cardOpened = null;
+        pairsFound = 0;
     }
 
     function closeCard(index) {

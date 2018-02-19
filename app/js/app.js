@@ -7,11 +7,15 @@ var vm = (function (Game) {
 
     Game.init();
 
+    var lockTimeout = 1000;
+
     var vm = new Vue({
         el: '#app',
         data: function () {
             return {
-                cards: Game.cards
+                cardOpened: false
+                , cards: Game.cards
+                , locked: false     //  locking player actions in view model
                 , score: Game.score
                 , state: STATE_START
             }
@@ -21,13 +25,22 @@ var vm = (function (Game) {
                 this.state = state;
             }
             , closeCard: function (index) {
+                if (this.locked) return;
                 Game.closeCard(index);
             }
             , openCard: function (index) {
+                if (this.locked) return;
                 Game.openCard(index);
-            }
-            , turnCard: function (index) {
-                Game.turnCard(index);
+                if (this.cardOpened) {
+                    this.locked = true;
+                    var self = this;
+                    setTimeout(function () {
+                        self.cardOpened = false;
+                        self.locked = false;
+                    }, lockTimeout);
+                } else {
+                    this.cardOpened = true;
+                }
             }
             , play: function () {
                 this.changeState(STATE_PLAY);
