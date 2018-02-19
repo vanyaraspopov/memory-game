@@ -81,7 +81,9 @@ var Game = (function () {
 
         , closeCard: closeCard
         , openCard: openCard
-        , turnCard: turnCard
+
+        , turnDownAll: turnDownAll
+        , showAll: showAll
     };
     return game;
 
@@ -245,6 +247,24 @@ var Game = (function () {
             return;
         }
         game.cards[index].turn();
+    }
+
+    function turnDownAll() {
+        var evalStr = '';
+        for (var i = 0; i < game.cards.length; i++) {
+            evalStr += 'game.cards[' + i + '].opened = ';
+        }
+        var eval_turnDownAllCards = evalStr + 'false;';
+        eval(eval_turnDownAllCards);
+    }
+
+    function showAll() {
+        var evalStr = '';
+        for (var i = 0; i < game.cards.length; i++) {
+            evalStr += 'game.cards[' + i + '].opened = ';
+        }
+        var eval_showAllCards = evalStr + 'true;';
+        eval(eval_showAllCards);
     }
 
     function reset() {
