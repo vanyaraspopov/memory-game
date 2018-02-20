@@ -13,28 +13,10 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": "^3.2.1",
     "normalize-css": "normalize.css#^7.0.0",
-    "components-font-awesome": "^4.7.0",
-    "bourbon": "^5.0.0",
     "vue": "^2.5.13"
   },
   "overrides": {
-    "jquery": {
-      "main": "dist/jquery.min.js"
-    },
-    "bootstrap": {
-      "main": [
-        "dist/css/bootstrap.min.css",
-        "dist/js/bootstrap.min.js"
-      ]
-    },
-    "components-font-awesome": {
-      "main": [
-        "css/font-awesome.min.css",
-        "fonts/**/*.*"
-      ]
-    },
     "vue": {
       "main": "dist/vue.min.js"
     }

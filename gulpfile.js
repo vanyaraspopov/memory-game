@@ -1,12 +1,11 @@
 'use strict';
 
 //  Common plugins
-var gulp = require('gulp'),
-    babel = require('gulp-babel'),
-    babelify = require('babelify'),
+var babelify = require('babelify'),
     browserify = require('browserify'),
     browserSync = require("browser-sync"),
     concat = require('gulp-concat'),
+    gulp = require('gulp'),
     reload = browserSync.reload,
     rigger = require('gulp-rigger'),
     rimraf = require('rimraf'),
