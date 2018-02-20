@@ -2,10 +2,15 @@
 
 //  Common plugins
 var gulp = require('gulp'),
+    babel = require('gulp-babel'),
+    babelify = require('babelify'),
+    browserify = require('browserify'),
     browserSync = require("browser-sync"),
+    concat = require('gulp-concat'),
     reload = browserSync.reload,
     rigger = require('gulp-rigger'),
     rimraf = require('rimraf'),
+    source = require('vinyl-source-stream'),
     sourcemaps = require('gulp-sourcemaps'),
     watch = require('gulp-watch');
 
@@ -41,7 +46,7 @@ var paths = {
         //  sources
         base: 'app/',
         html: 'app/*.html',
-        js: 'app/js/index.js',
+        js: 'app/js/app.js',
         //js: 'app/js/**/*.js',
         style: 'app/sass/style.scss',
         img: 'app/img/**/*.*',
@@ -95,12 +100,18 @@ gulp.task('html:build', function () {
 });
 
 gulp.task('js:build', function () {
-    return gulp.src(paths.src.js)
-        .pipe(rigger())
-    // .pipe(sourcemaps.init())
-    // .pipe(uglify())
-    // .pipe(sourcemaps.write())
-        .pipe(gulp.dest(paths.build.js))
+    return browserify(
+        {
+            entries: paths.src.js,
+            extensions: ['.js'],
+            debug: true
+        })
+        .transform('babelify', {
+            presets: ['es2015'],
+        })
+        .bundle()
+        .pipe(source('js/app.js'))
+        .pipe(gulp.dest('dist'))
         .pipe(reload({stream: true}));
 });
 

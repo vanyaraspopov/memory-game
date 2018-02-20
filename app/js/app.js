@@ -1,5 +1,7 @@
 'use strict';
 
+import Game from './components/game/game';
+
 var vm = (function (Game) {
     const STATE_START = 'start';
     const STATE_PLAY = 'play';
@@ -8,8 +10,8 @@ var vm = (function (Game) {
     Game.init();
 
     var lockTimeout = 1000;
-
     var timeouts = [];
+
     var vm = new Vue({
         el: '#app',
         data: function () {
