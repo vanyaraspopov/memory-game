@@ -1,6 +1,7 @@
 'use strict';
 
 import Game from './components/game/game';
+import Vue from '../../node_modules/vue/dist/vue.min';
 
 //  view model
 let vm = (function (Game) {

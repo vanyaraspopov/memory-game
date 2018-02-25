@@ -16,14 +16,11 @@ var babelify = require('babelify'),
 //  CSS plugins
 var sass = require('gulp-sass'),
     //cssmin = require('gulp-minify-css'),
-    autoprefixer = require('gulp-autoprefixer');
+    autoprefixer = require('gulp-autoprefixer'),
+    moduleImporter = require('sass-module-importer');
 
 //  JS plugins
 //var uglify = require('gulp-uglify');
-
-//  Bower plugins
-var bower = require('main-bower-files'),
-    wiredep = require('wiredep').stream;
 
 //  Image plugins
 //imagemin = require('gulp-imagemin'),
@@ -38,8 +35,7 @@ var paths = {
         js: 'dist/js/',
         css: 'dist/css/',
         img: 'dist/img/',
-        fonts: 'dist/fonts/',
-        bower: 'dist/bower_components/'
+        fonts: 'dist/fonts/'
     },
     src: {
         //  sources
@@ -49,8 +45,7 @@ var paths = {
         //js: 'app/js/**/*.js',
         style: 'app/sass/style.scss',
         img: 'app/img/**/*.*',
-        fonts: 'app/fonts/**/*.*',
-        bower: 'app/bower_components/'
+        fonts: 'app/fonts/**/*.*'
     },
     watch: {
         //  files watch to
@@ -90,10 +85,6 @@ gulp.task('watch', function () {
 gulp.task('html:build', function () {
     return gulp.src(paths.src.html)
         .pipe(rigger())
-        .pipe(wiredep({
-            optional: 'configuration',
-            goes: 'here'
-        }))
         .pipe(gulp.dest(paths.build.html))
         .pipe(reload({stream: true}));
 });
@@ -117,7 +108,7 @@ gulp.task('js:build', function () {
 gulp.task('style:build', function () {
     return gulp.src(paths.src.style)
         .pipe(sourcemaps.init())
-        .pipe(sass())
+        .pipe(sass({ importer: moduleImporter() }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
@@ -138,11 +129,6 @@ gulp.task('img:build', function () {
         .pipe(gulp.dest(paths.build.img))
 });
 
-gulp.task('bower', function () {
-    return gulp.src(bower(), {base: paths.src.bower})
-        .pipe(gulp.dest(paths.build.bower));
-});
-
 gulp.task('clean', function (cb) {
     rimraf(paths.clean, cb);
 });
@@ -152,8 +138,7 @@ gulp.task('build', gulp.series('clean', gulp.parallel(
     'js:build',
     'style:build',
     'fonts:build',
-    'img:build',
-    'bower'
+    'img:build'
 )));
 
 gulp.task('default', gulp.series('build', gulp.parallel('watch', 'webserver')));
