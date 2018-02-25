@@ -2,19 +2,20 @@
 
 import Game from './components/game/game';
 
-var vm = (function (Game) {
+//  view model
+let vm = (function (Game) {
     const STATE_START = 'start';
     const STATE_PLAY = 'play';
     const STATE_END = 'end';
 
     Game.init();
 
-    var lockTimeout = 1000;
-    var timeouts = [];
+    let lockTimeout = 1000;
+    let timeouts = [];
 
-    var vm = new Vue({
+    let vm = new Vue({
         el: '#app',
-        data: function () {
+        data () {
             return {
                 cardOpened: false
                 , cards: Game.cards
@@ -24,21 +25,21 @@ var vm = (function (Game) {
             }
         },
         methods: {
-            changeState: function (state) {
+            changeState (state) {
                 this.state = state;
             }
-            , clearTimeouts: function () {
-                for (var i = 0; i < timeouts.length; i++) {
+            , clearTimeouts () {
+                for (let i = 0; i < timeouts.length; i++) {
                     clearTimeout(timeouts[i]);
                 }
                 timeouts = [];
             }
-            , closeCard: function (index) {
+            , closeCard (index) {
                 /*if (this.locked) return;
-                this.cardOpened = false;
-                Game.closeCard(index);*/
+                 this.cardOpened = false;
+                 Game.closeCard(index);*/
             }
-            , openCard: function (index) {
+            , openCard (index) {
                 if (this.locked) return;
                 Game.openCard(index);
                 if (this.cardOpened) {
@@ -48,29 +49,29 @@ var vm = (function (Game) {
                     this.cardOpened = true;
                 }
             }
-            , lock: function (timeout) {
+            , lock (timeout) {
                 if (timeout === undefined) timeout = lockTimeout;
                 this.locked = true;
-                var self = this;
+                let self = this;
                 timeouts.push(setTimeout(function () {
                     self.locked = false;
                 }, timeout));
             }
-            , play: function () {
+            , play () {
                 Game.showAll();
                 this.changeState(STATE_PLAY);
-                var timeout = 5000;
+                let timeout = 5000;
                 this.lock(timeout);
                 timeouts.push(setTimeout(function () {
                     Game.turnDownAll();
                 }, timeout));
             }
-            , replay: function () {
+            , replay () {
                 this.changeState(STATE_START);
                 this.clearTimeouts();
                 Game.reset();
             }
-            , updateViewModel: function () {
+            , updateViewModel () {
                 Vue.set(this, 'cards', Game.cards);
                 Vue.set(this, 'score', Game.score);
                 if (Game.completed) {
