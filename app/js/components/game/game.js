@@ -239,4 +239,4 @@ let Game = (function () {
 
 })();
 
-module.exports = Game;
+export default Game;
